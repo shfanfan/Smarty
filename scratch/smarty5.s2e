@@ -1,0 +1,22 @@
+{
+ "extensionName": "smarty",
+ "extensionPort": 1337,
+ "blockSpecs": [
+	[" ", "turn %m.Motors  %m.onOff", "SetMotorOnOff","motor1","on"],
+	[" ", "turn %m.Motors for %n seconds", "SetMotorOnForSeconds","motor1","10"],
+	["b", "is %m.Motors on?","GetIsMotorOn","motor1"],
+	[" ", "set %m.Motors speed to %n%", "SetMotorSpeed","motor1","100"],
+	["r", "%m.Motors speed","GetMotorSpeed","motor1"],
+	["r", "sensor %m.AnalogSensors value", "GetGensorValue","A1"],
+	["b", "is sensor %m.DigitalSensors triggered?", "GetIsSensorTrigered","D1"],
+	[" ", "set %m.Outputs to %n%", "SetOutputValue","Out1"],
+  ],
+ "menus": {
+	"Motors": ["motor1", "motor2", "motor3", "motor4"],
+	"Sensors": ["A1", "A2", "A3","D1", "D2", "D3"],
+	"AnalogSensors": ["A1", "A2", "A3"],
+	"DigitalSensors": ["D1", "D2", "D3"],
+	"Outputs": ["Out1", "Out2", "Out3"],
+	"onOff": ["on", "off"],
+ },
+}

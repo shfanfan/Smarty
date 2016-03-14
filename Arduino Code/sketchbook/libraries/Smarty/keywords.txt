@@ -1,0 +1,11 @@
+Smarty KEYWORD1
+PinCmd KEYWORD1
+setupSmarty KEYWORD2
+setHardInputs KEYWORD2
+setSoftInputs KEYWORD2
+setCallbacks KEYWORD2
+GenericCmdCb KEYWORD2
+SetAnalogCmdCb KEYWORD2
+SetDigitalCmdCb KEYWORD2
+DcMotorCmdCb KEYWORD2
+DefaultCmdCb KEYWORD2

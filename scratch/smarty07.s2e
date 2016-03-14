@@ -1,0 +1,20 @@
+{
+ "extensionName": "smarty",
+ "extensionPort": 1234,
+ "blockSpecs": [
+	[" ", "s%n cmd %n parameter %n", "DoCommandOneParameter","1","2","3"],
+	[" ", "s%n cmd %n parameters %n ,%n ,%n ,%n ","DoCommandFourParameters","10","11","1","2","3","4"],
+	[" ", "s%n turn motor %n  %m.onOff", "TurnMotorOnOff","1","1","on"],
+	[" ", "s%n set motor %n direction to %m.direction", "TurnMotorDirection","1","1","cw"],
+	[" ", "s%n set motor %n speed to %n [%]", "SetMotorSpeed","1","1","100"],
+	["r", "s%n analog %n", "GetAnalogValue","1","1"],
+	["b", "s%n digital %n", "GetDigitalValue","1","1"],
+	[" ", "s%n set analog %n to %n [%]", "SetAnalogValue","1","2","100"],
+	[" ", "s%n set digital %n to %m.onOff", "SetDigitalValue","1","2","on"],
+  ],
+ "menus": {
+	"Motors": ["motor1", "motor2", "motor3", "motor4"],
+	"onOff": ["on", "off"],
+	"direction": ["cw","ccw","reverse"],
+ },
+}

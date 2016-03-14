@@ -1,0 +1,24 @@
+{
+ "extensionName": "smarty",
+ "extensionPort": 1234,
+ "blockSpecs": [
+	[" ", "smarty %n command %n parameter %n", "SetSmartyParameter","1","2","3"],
+	[" ", "smarty %n command %n parameters %n ,%n ,%n ,%n ","SetMultiParameters","10","11","1","2","3","4"],
+	[" ", "smarty %n turn %m.Motors  %m.onOff", "TurnMotorOnOff","1","motor1","on"],
+	[" ", "smarty %n set %m.Motors direction to %m.direction", "TurnMotorDirection","1","motor1","on"],
+	[" ", "smarty %n set %m.Motors speed to %n [%]", "SetMotorSpeed","1","motor1","100"],
+	["r", "smarty %n analog value", "GetAnalogValue","1"],
+	["b", "smarty %n digital value", "GetDigitalValue","1"],
+	[" ", "smarty %n set analog %n to %n [%]", "SetAnalogValue","1","2","100"],
+	[" ", "smarty %n set digital %n to %m.onOff", "SetDigitalValue","1","2","on"],
+  ],
+ "menus": {
+	"Motors": ["motor1", "motor2", "motor3", "motor4"],
+	"Sensors": ["A1", "A2", "A3","D1", "D2", "D3"],
+	"AnalogSensors": ["A1", "A2", "A3"],
+	"DigitalSensors": ["D1", "D2", "D3"],
+	"Outputs": ["Out1", "Out2", "Out3"],
+	"onOff": ["on", "off"],
+	"direction": ["cw","ccw","reverse"],
+ },
+}

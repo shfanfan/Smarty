@@ -1,0 +1,15 @@
+#include <AFMotor.h>
+
+class SmartyMotor
+{
+	AF_DCMotor motor;
+
+public:
+	SmartyMotor(int shieldPlug);
+};
+
+SmartyMotor::SmartyMotor(int shieldPlug):motor(shieldPlug)
+{
+}
+
+
