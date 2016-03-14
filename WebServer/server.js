@@ -6,7 +6,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 //node static folders definition
-//app.use(express.static(path.join(__dirname,'node_modules')));
+app.use(express.static(path.join(__dirname,'client')));
 app.use(express.static(__dirname));
 
 var smartyDatbase = {
@@ -34,17 +34,29 @@ io.on('connection', function (socket) {
 
 //client page root
 app.get('/', function (req, res) {
-  res.sendFile (path.join(__dirname, 'index.html')) 
+  res.sendFile (path.join(__dirname, 'client/index.html'))
 });
+
+app.get('/crossdomain.xml', function (req, res) {
+	console.log('flash asked for a crossdomain authentication');
+	var str = "<cross-domain-policy><allow-access-from domain=\"*\" to-ports=\"" + PORT + "\"/></cross-domain-policy>";
+	res.send (str);
+})
+
 
 //scratch poll response
 app.get('/poll', function (req, res) {
-	var responseString="_problem no smatrties are connected."
-	if (smartyDatbase.smartiesMap!==undefined && smartyDatbase.smartiesMap.length>0)
+
+	var responseString="";
+	if (smartyDatbase.smartiesMap!==undefined && Object.keys(smartyDatbase.smartiesMap).length>0)
 	{
 		for (var smarty in smartyDatbase.smartiesMap){
-			responseString += "GetAnalogValue/" + serial + "\n";
-		}	
+			//responseString += "GetAnalogValue/" + smartyDatbase.smartiesMap[smarty].serial + "\n";
+			responseString += "GetAnalogValue/1/1 55" + "\n";
+			responseString += "GetAnalogValue/2/1 65" + "\n";
+		}
+	}else{
+		responseString="_problem no smatrties are connected."
 	}
 	res.send (responseString);
 
@@ -52,6 +64,8 @@ app.get('/poll', function (req, res) {
 });
 
 app.get('/*', function (req, res) {
+	console.log(req.url);
+	res.send();
   //TODO: parse the request and return data
   
 });
@@ -66,29 +80,29 @@ app.listen(PORT, function () {
 
 
 
-//----------------------------------------------------------
-//	serial communication with the smartBrick
-//----------------------------------------------------------
+//      ----------------------------------------------------------
+//      	serial communication with the smartBrick
+//      ----------------------------------------------------------
 
-var smartyGWPkg = require('./smartyGW');
-var smartyGW = new smartyGWPkg();
-var led = 0;
+//      r smartyGWPkg = require('./smartyGW');
+//      r smartyGW = new smartyGWPkg();
+//      r led = 0;
 
-function blink() {
-	smartyGW.sendCommand(1, 0xCA, 5, led, 0, 0, 0, 0);
-	led = 255-led;
-}
+//      nction blink() {
+//      	smartyGW.sendCommand(1, 0xCA, 5, led, 0, 0, 0, 0);
+//      	led = 255-led;
+//
 
-function onDebug(smartyID, debugString) {
-	console.log("Debug string from smarty #" + smartyID + " : " + debugString);
-}
+//      nction onDebug(smartyID, debugString) {
+//      	console.log("Debug string from smarty #" + smartyID + " : " + debugString);
+//
 
-function onRxMsg(rxBuffer) {
-	console.log("rxmsg : ");
-	for (var i = 0; i < rxBuffer.length; i++)
-		console.log(rxBuffer[i].toString(16));
-}
+//      nction onRxMsg(rxBuffer) {
+//      	console.log("rxmsg : ");
+//      	for (var i = 0; i < rxBuffer.length; i++)
+//      		console.log(rxBuffer[i].toString(16));
+//
 
-setInterval(blink, 1000);
-smartyGW.on('debugmsg', onDebug);
-//smartyGW.on('rxmsg', onRxMsg);
+//      tInterval(blink, 1000);
+//      artyGW.on('debugmsg', onDebug);
+//      smartyGW.on('rxmsg', onRxMsg);
