@@ -1,0 +1,1 @@
+node "E:\My  Work\Smarty\SmartyScrachHelper\Helper.js"

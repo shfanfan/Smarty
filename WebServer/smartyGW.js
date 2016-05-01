@@ -1,6 +1,8 @@
 var SerialPortPkg = require("serialport");
 var EventEmitter = require('events').EventEmitter;
+//var events = require('events');
 var util = require('util');
+//var eventEmitter = new events.EventEmitter();
 
 var serialPort = null;
 const rxBuffer = new Buffer(8);
@@ -113,7 +115,7 @@ smartyGW.prototype.isOpen = function() {
 
 smartyGW.prototype.sendBuffer  = function(data) {
 	if (serialPort != null && serialPort.isOpen()) {
-		console.log("Sending: " + data);
+		//console.log("Sending: " + data);
 		serialPort.write(data);
 	}
 }

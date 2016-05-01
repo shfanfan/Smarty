@@ -1,6 +1,6 @@
 {
  "extensionName": "smarty",
- "extensionPort": 1234,
+ "extensionPort": 80,
  "blockSpecs": [
 	[" ", "s%n cmd %n parameter %n", "DoCommandOneParameter","1","2","3"],
 	[" ", "s%n cmd %n parameters %n ,%n ,%n ,%n ","DoCommandFourParameters","10","11","1","2","3","4"],

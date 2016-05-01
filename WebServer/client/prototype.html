@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+
+	<head>
+		
+	</head>
+
+
+	<body >
+
+		<h5>from server:</h5>
+		<input id="input"/>
+		<h5>user Input:</h5>
+		<input id="output"/>
+
+
+		<br><br><br>
+		SmartyID: 	<input value="0" id="SmartyID"/>
+		pin1Id: 	<input value="13" id="pin1Id"/>
+		pin1Value: 	<input value="1" id="pin1Value"/>
+		<br/>
+		<button id="userInput">do stuff</button>
+		<br/><br/><br/>
+
+
+
+
+		hello !!
+
+
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<script>
+
+			var socket = io();
+			userInputCounter = 0;
+			pollCounter = 0;
+			$('#userInput').click(function(){
+
+				var message = {
+					SmartyID: 	$("#SmartyID").val(),
+					pin1Id:		$("#pin1Id").val(),
+					pin1Value:	$("#pin1Value").val(),	
+					pin2Id:		0,
+					pin2Value:	0,
+					pin3Id:		0,
+					pin3Value:	0
+				}
+
+				console.log( JSON.stringify (message) );
+
+				socket.emit('sendDigitalOut', JSON.stringify(message));
+				
+				if ($("#pin1Value").val() === '1'){
+					$("#pin1Value").val('0');
+				}else
+				{
+					$("#pin1Value").val('1');
+				}
+
+
+				userInputCounter +=1;
+				$('#output').val('sent! ' + userInputCounter);
+			});
+
+//smartyGW.sendCommand(0, 0xCD, 13, led, 0, 0, 0, 0);
+//	smartyGW.sendCommand(message.SmartyID, 0xCD, message.pin1Id, message.pin1Value, message.pin2Id, message.pin2Value, message.pin3Id, message.pin3Value);
+
+
+
+			socket.on("poll",function(){
+				console.log("pol arrived!");
+				pollCounter += 1;
+				$('#input').val('sent! ' + pollCounter);
+			});
+
+		</script>
+	</body>
+</html>
